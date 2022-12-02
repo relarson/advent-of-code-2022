@@ -17,12 +17,28 @@ pub fn get_input(day: &str) -> Vec<String> {
     for line_res in br.lines() {
         match line_res {
             Ok(line) => lines.push(line),
-            Err(e) => panic!(e)
+            Err(e) => panic!("{}", e)
         }
     }
 
     lines
 }
+
+pub fn get_space_delimited_input(day: &str) -> Vec<Vec<String>> {
+    let lines = get_input(day);
+
+    let mut output = Vec::new();
+    for line in &lines {
+        let mut delimited = Vec::new();
+        for word in line.split_whitespace() {
+            delimited.push(String::from(word))
+        }
+        output.push(delimited)
+    }
+
+    output
+}
+
 
 pub fn get_numeric_input<T>(day: &str) -> Vec<T>
     where T: Add + Product + FromStr,
@@ -39,21 +55,24 @@ pub fn get_numeric_input<T>(day: &str) -> Vec<T>
     nums
 }
 
-/*fn get_input_from_web(day: &str) -> String {
-    let mut bytes = Vec::new();
-    let mut easy = Easy::new();
-    let url = "https://adventofcode.com/2020/day/".to_string() + day + "/input";
-    easy.url(url.as_str()).unwrap();
+pub fn get_grouped_numeric_input<T>(day: &str) -> Vec<Vec<T>>
+    where T: Add + Product + FromStr,
+        <T as FromStr>::Err: Debug
+{
+    let input = get_input(day);
+    let mut groups = Vec::new();
 
-    {
-        let mut transfer = easy.transfer();
-        transfer.write_function(|data| {
-            bytes.extend_from_slice(data);
-            Ok(data.len())
-        }).unwrap();
-        transfer.perform().unwrap();
+    let mut current = Vec::new();
+
+    for line in &input {
+        if line.is_empty() {
+            groups.push(current);
+            current = Vec::new();
+        } else {
+            let n = line.parse::<T>().unwrap();
+            current.push(n);
+        }
     }
 
-    let s = String::from_utf8(bytes).expect("Found invalid UTF-8");
-    s
-}*/
+    groups
+}
