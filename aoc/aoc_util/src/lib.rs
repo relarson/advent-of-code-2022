@@ -24,16 +24,12 @@ pub fn get_input(day: &str) -> Vec<String> {
     lines
 }
 
-pub fn get_space_delimited_input(day: &str) -> Vec<Vec<String>> {
+pub fn get_delimited_input(day: &str, delimiter: &str) -> Vec<Vec<String>> {
     let lines = get_input(day);
 
     let mut output = Vec::new();
     for line in &lines {
-        let mut delimited = Vec::new();
-        for word in line.split_whitespace() {
-            delimited.push(String::from(word))
-        }
-        output.push(delimited)
+        output.push(line.split(delimiter).map(String::from).collect())
     }
 
     output

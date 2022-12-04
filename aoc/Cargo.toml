@@ -4,5 +4,6 @@ members = [
     "aoc_util",
     "aoc_1",
     "aoc_2",
-    "aoc_3"
+    "aoc_3",
+    "aoc_4"
 ]

@@ -1,5 +1,5 @@
 use aoc_util;
-use aoc_util::get_space_delimited_input;
+use aoc_util::get_delimited_input;
 
 fn main() {
     part1();
@@ -7,7 +7,7 @@ fn main() {
 }
 
 fn part1() {
-    let games : Vec<Vec<String>> = get_space_delimited_input("2");
+    let games : Vec<Vec<String>> = get_delimited_input("2", " ");
 
     let mut score = 0;
 
@@ -19,7 +19,7 @@ fn part1() {
 }
 
 fn part2() {
-    let games : Vec<Vec<String>> = get_space_delimited_input("2");
+    let games : Vec<Vec<String>> = get_delimited_input("2", " ");
 
     let mut score = 0;
 
