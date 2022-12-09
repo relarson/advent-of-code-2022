@@ -72,3 +72,19 @@ pub fn get_grouped_numeric_input<T>(day: &str) -> Vec<Vec<T>>
 
     groups
 }
+
+pub fn get_int_matrix(day: &str) -> Vec<Vec<u32>> {
+    let input = get_input(day);
+
+    let mut matrix = Vec::new();
+
+    for line in &input {
+        let row = line.chars()
+                    .into_iter()
+                    .map(|c| c.to_digit(10).unwrap())
+                    .collect();
+        matrix.push(row);
+    }
+
+    matrix
+}
